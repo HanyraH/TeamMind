@@ -1,0 +1,211 @@
+{
+  "project": "TeamMind",
+  "audit_date": "2026-10-17",
+  "status": "ALL_FIXED_AND_VERIFIED",
+  "summary": {
+    "total_defects": 19,
+    "fixed_defects": 19,
+    "pending_defects": 0,
+    "tests_passed": 12,
+    "tests_failed": 0
+  },
+  "defects": [
+    {
+      "id": "BUG-01",
+      "category": "Backend / GraphQL",
+      "severity": "CRITICAL",
+      "description": "403 Forbidden CSRF error on POST /graphql/",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/graphql/views.py",
+        "backend/config/urls.py"
+      ]
+    },
+    {
+      "id": "BUG-02",
+      "category": "Backend / GraphQL",
+      "severity": "HIGH",
+      "description": "AttributeError on anonymous GraphQL mutation calls",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/graphql/schema.py"
+      ]
+    },
+    {
+      "id": "BUG-03",
+      "category": "Backend / Python 3.14",
+      "severity": "CRITICAL",
+      "description": "Django admin 500 on template context copy under Python 3.14",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/users/apps.py"
+      ]
+    },
+    {
+      "id": "BUG-04",
+      "category": "Backend / REST API",
+      "severity": "HIGH",
+      "description": "TeamSerializer missing criteria score fields and members",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/teams/serializers.py"
+      ]
+    },
+    {
+      "id": "BUG-05",
+      "category": "Backend / Security",
+      "severity": "MEDIUM",
+      "description": "Unrestricted team member modification actions",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/teams/views.py"
+      ]
+    },
+    {
+      "id": "BUG-06",
+      "category": "Backend / Routing",
+      "severity": "LOW",
+      "description": "Root URL / returned 404",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/config/urls.py"
+      ]
+    },
+    {
+      "id": "BUG-07",
+      "category": "Backend / Models",
+      "severity": "LOW",
+      "description": "MinValueValidator warning on DecimalField in Employee",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/employees/models.py"
+      ]
+    },
+    {
+      "id": "BUG-08",
+      "category": "Frontend & Backend / Auth",
+      "severity": "HIGH",
+      "description": "Manual login failed when entering username or short demo password due to strict email validation and missing alias resolution",
+      "status": "RESOLVED",
+      "files_modified": [
+        "frontend/src/pages/LoginPage.tsx",
+        "backend/apps/users/serializers.py"
+      ]
+    },
+    {
+      "id": "BUG-09",
+      "category": "Frontend / Analytics",
+      "severity": "MEDIUM",
+      "description": "Hardcoded 68.4% capacity utilization metric on Dashboard",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/analytics/views.py",
+        "frontend/src/pages/DashboardPage.tsx"
+      ]
+    },
+    {
+      "id": "BUG-10",
+      "category": "Frontend / Vacations",
+      "severity": "MEDIUM",
+      "description": "Vacation form validation error for employee role",
+      "status": "RESOLVED",
+      "files_modified": [
+        "frontend/src/pages/VacationsPage.tsx",
+        "backend/apps/vacations/serializers.py"
+      ]
+    },
+    {
+      "id": "BUG-11",
+      "category": "Desktop / Electron",
+      "severity": "HIGH",
+      "description": "Blank screen on launch without active Vite dev server",
+      "status": "RESOLVED",
+      "files_modified": [
+        "desktop/main.js"
+      ]
+    },
+    {
+      "id": "BUG-12",
+      "category": "Desktop / Electron",
+      "severity": "HIGH",
+      "description": "Absolute asset paths failed to load under file:// protocol",
+      "status": "RESOLVED",
+      "files_modified": [
+        "frontend/vite.config.ts"
+      ]
+    },
+    {
+      "id": "BUG-13",
+      "category": "Docker / Infrastructure",
+      "severity": "HIGH",
+      "description": "Incorrect build context for frontend Dockerfile",
+      "status": "RESOLVED",
+      "files_modified": [
+        "docker-compose.yml",
+        "docker/Dockerfile.frontend"
+      ]
+    },
+    {
+      "id": "BUG-14",
+      "category": "Docker / Nginx",
+      "severity": "HIGH",
+      "description": "Missing admin, static, and media reverse proxy routes",
+      "status": "RESOLVED",
+      "files_modified": [
+        "docker/nginx.conf"
+      ]
+    },
+    {
+      "id": "BUG-15",
+      "category": "Docker / Database",
+      "severity": "MEDIUM",
+      "description": "Backend startup race condition with PostgreSQL database",
+      "status": "RESOLVED",
+      "files_modified": [
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "id": "BUG-16",
+      "category": "Frontend / Performance",
+      "severity": "MEDIUM",
+      "description": "Monolithic 731 KB frontend bundle triggering Vite chunk size warnings",
+      "status": "RESOLVED",
+      "files_modified": [
+        "frontend/vite.config.ts"
+      ]
+    },
+    {
+      "id": "BUG-17",
+      "category": "Backend / GraphQL",
+      "severity": "MEDIUM",
+      "description": "Missing employees and projects query resolvers in Strawberry schema",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/graphql/schema.py",
+        "backend/tests/test_graphql.py"
+      ]
+    },
+    {
+      "id": "BUG-18",
+      "category": "Backend / Validation",
+      "severity": "LOW",
+      "description": "Unchecked team_size type and value in team generation view and GraphQL mutation",
+      "status": "RESOLVED",
+      "files_modified": [
+        "backend/apps/teams/views.py",
+        "backend/apps/graphql/schema.py"
+      ]
+    },
+    {
+      "id": "BUG-19",
+      "category": "Frontend / UX",
+      "severity": "LOW",
+      "description": "Silent modal failure on invalid dates in vacation submission",
+      "status": "RESOLVED",
+      "files_modified": [
+        "frontend/src/pages/VacationsPage.tsx"
+      ]
+    }
+  ]
+}

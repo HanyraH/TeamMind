@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Midnight OLED & Emerald</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030708;
+      --card: #081012;
+      --border: #132225;
+      --border-emerald: rgba(16, 185, 129, 0.3);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.4);
+      --mint: #6ee7b7;
+      --text: #ecfdf5;
+      --text-muted: #6ee7b7aa;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #020506;
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      font-family: var(--font-mono);
+    }
+
+    .brand {
+      color: var(--emerald);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      text-shadow: 0 0 12px var(--emerald-glow);
+    }
+
+    .nav { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.15s;
+    }
+    .nav li.active a, .nav a:hover {
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--emerald);
+      border-left: 2px solid var(--emerald);
+    }
+
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      font-family: var(--font-mono);
+    }
+
+    .btn-emerald {
+      background: var(--emerald);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 9px 18px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 16px var(--emerald-glow);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--border-emerald);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.05);
+    }
+
+    .val {
+      font-family: var(--font-mono);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--emerald);
+      margin: 8px 0;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">► TEAMMIND_OLED</div>
+    <ul class="nav">
+      <li class="active"><a href="#">[01] SYNC_DASH</a></li>
+      <li><a href="#">[02] ASSEMBLE_V3</a></li>
+      <li><a href="#">[03] REPO_PROJECTS</a></li>
+      <li><a href="#">[04] NODES_ROSTER</a></li>
+      <li><a href="#">[05] SCHEDULE_MAP</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div>
+        <h1>SYSTEM_ASSEMBLY // PROJECT_04</h1>
+        <p style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono); margin-top: 4px;">
+          status: OPTIMAL_MATCH_FOUND • execution_time: 24ms
+        </p>
+      </div>
+      <button class="btn-emerald">EXECUTE_DEPLOY()</button>
+    </div>
+
+    <div class="grid-4">
+      <div class="card">
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">INDEX_SCORE</div>
+        <div class="val">98.2%</div>
+        <div style="font-size: 11px; color: var(--mint); font-family: var(--font-mono);">Δ +3.2% OVER_TARGET</div>
+      </div>
+      <div class="card">
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">SKILL_COVERAGE</div>
+        <div class="val">14/14</div>
+        <div style="font-size: 11px; color: var(--mint); font-family: var(--font-mono);">ZERO_DEFICIT</div>
+      </div>
+      <div class="card">
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">OVERLAP_WINDOW</div>
+        <div class="val">06:00</div>
+        <div style="font-size: 11px; color: var(--mint); font-family: var(--font-mono);">SYNCHRONOUS_HOURS</div>
+      </div>
+      <div class="card">
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">VACATION_LEAK</div>
+        <div class="val">0.00</div>
+        <div style="font-size: 11px; color: var(--mint); font-family: var(--font-mono);">NO_COLLISIONS</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <h3 style="font-family: var(--font-mono); font-size: 15px; margin-bottom: 16px;">ACTIVE_ROSTER</h3>
+
+        <div class="row">
+          <div>
+            <div style="font-weight: 600; font-family: var(--font-mono);">Дмитрий Кузнецов</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Backend Core Lead • Python/Django</div>
+          </div>
+          <div style="font-family: var(--font-mono); color: var(--emerald); font-weight: 700;">99.1_PTS</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <div style="font-weight: 600; font-family: var(--font-mono);">Елена Васильева</div>
+            <div style="font-size: 12px; color: var(--text-muted);">UI Architect • React / Vite</div>
+          </div>
+          <div style="font-family: var(--font-mono); color: var(--emerald); font-weight: 700;">97.4_PTS</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-family: var(--font-mono); font-size: 15px; margin-bottom: 16px;">TELEMETRY_LOG</h3>
+        <p style="font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); line-height: 1.7;">
+          [INIT] Matrix weights: 0.35K + 0.25A + 0.20L + 0.10T + 0.10C<br>
+          [PASS] Schedule verification OK<br>
+          [DONE] Roster validated without load penalties.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

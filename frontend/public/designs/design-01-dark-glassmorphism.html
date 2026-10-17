@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Modern Dark Glassmorphism</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #090d16;
+      --bg-card: rgba(22, 29, 49, 0.65);
+      --bg-card-hover: rgba(30, 41, 69, 0.75);
+      --bg-surface: rgba(255, 255, 255, 0.04);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.35);
+      --secondary: #a855f7;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --radius-xl: 20px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(168, 85, 247, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: rgba(13, 18, 30, 0.7);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border-card);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 12px 24px 12px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .brand-text h1 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
+    .brand-text span { font-size: 11px; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .nav-menu { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 6px; }
+    .nav-item a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .nav-item.active a, .nav-item a:hover {
+      background: var(--bg-surface);
+      color: #fff;
+      border: 1px solid var(--border-card);
+    }
+
+    .nav-item.active a {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.1));
+      border-color: var(--border-focus);
+      color: #fff;
+    }
+
+    .user-profile {
+      margin-top: auto;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Main Area */
+    .main-content {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .page-title h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+    .page-title p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+    .header-actions { display: flex; gap: 12px; }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px var(--primary-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-glass {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-card);
+      backdrop-filter: blur(10px);
+    }
+    .btn-glass:hover { background: rgba(255, 255, 255, 0.08); }
+
+    /* Glass Cards Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .glass-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .stat-value { font-size: 32px; font-weight: 800; margin: 10px 0 6px 0; font-family: var(--font-mono); letter-spacing: -1px; }
+    .stat-meta { font-size: 12px; color: var(--accent-emerald); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+    /* Team Assembly Section */
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .section-header h3 { font-size: 17px; font-weight: 700; }
+
+    /* Candidate list */
+    .candidate-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+    .candidate-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-focus);
+    }
+
+    .candidate-info { display: flex; align-items: center; gap: 14px; }
+    .candidate-name { font-weight: 600; font-size: 14px; }
+    .candidate-role { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+    .pill-purple { background: rgba(168, 85, 247, 0.12); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+    .pill-cyan { background: rgba(6, 182, 212, 0.12); color: #22d3ee; border-color: rgba(6, 182, 212, 0.3); }
+    .pill-green { background: rgba(16, 185, 129, 0.12); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+
+    .skills-row { display: flex; gap: 6px; }
+    .skill-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .score-badge {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--accent-cyan);
+    }
+
+    /* Radar / Formula Card */
+    .formula-box {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #c7d2fe;
+    }
+
+    .score-meter {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .meter-item { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+    .meter-bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .meter-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent-cyan));
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">TM</div>
+      <div class="brand-text">
+        <h1>TeamMind</h1>
+        <span>AI Team Assembly</span>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item active"><a href="#">📊 Дашборд</a></li>
+      <li class="nav-item"><a href="#">⚡ Конструктор команд</a></li>
+      <li class="nav-item"><a href="#">📁 Проекты</a></li>
+      <li class="nav-item"><a href="#">👥 Специалисты</a></li>
+      <li class="nav-item"><a href="#">🏖 График отпусков</a></li>
+      <li class="nav-item"><a href="#">📈 Аналитика & KPI</a></li>
+    </ul>
+
+    <div class="user-profile">
+      <div class="avatar">АС</div>
+      <div>
+        <div style="font-weight: 600; font-size: 13px;">Александр С.</div>
+        <div style="font-size: 11px; color: var(--text-dim);">Project Lead</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="top-header">
+      <div class="page-title">
+        <h2>Сборка проектной команды #4</h2>
+        <p>FinTech Payment Gateway Core — плановый запуск через 12 дней</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-glass">⚙️ What-if симуляция</button>
+        <button class="btn btn-primary">🚀 Сгенерировать команду</button>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="glass-card">
+        <div class="stat-label">Совместимость состава</div>
+        <div class="stat-value" style="color: #818cf8;">94.2%</div>
+        <div class="stat-meta">↑ Топ-вариант "Максимальный баланс"</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-label">Покрытие навыков</div>
+        <div class="stat-value" style="color: #34d399;">100%</div>
+        <div class="stat-meta">Все 14 проектных требований закрыты</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-label">Конфликты расписаний</div>
+        <div class="stat-value" style="color: #38bdf8;">0 дн.</div>
+        <div class="stat-meta">Пересечений с отпусками нет</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-label">Средняя нагрузка</div>
+        <div class="stat-value" style="color: #fcd34d;">36.5 ч</div>
+        <div class="stat-meta">Без превышения допустимых лимитов</div>
+      </div>
+    </div>
+
+    <!-- Main Two Col -->
+    <div class="two-col-layout">
+      <!-- Left: Candidates in team -->
+      <div class="glass-card">
+        <div class="section-header">
+          <h3>Рекомендованный состав (5 специалистов)</h3>
+          <span class="pill pill-purple">Вариант #1 • Сбалансированный</span>
+        </div>
+
+        <div class="candidate-card">
+          <div class="candidate-info">
+            <div class="avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4);">ДК</div>
+            <div>
+              <div class="candidate-name">Дмитрий Кузнецов</div>
+              <div class="candidate-role">Lead Python / Django • Backend-разработка</div>
+            </div>
+          </div>
+          <div class="skills-row">
+            <span class="skill-chip">Django L5</span>
+            <span class="skill-chip">PostgreSQL L5</span>
+            <span class="skill-chip">Docker L4</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="pill pill-cyan">🦉 Сова</span>
+            <div class="score-badge">98.5</div>
+          </div>
+        </div>
+
+        <div class="candidate-card">
+          <div class="candidate-info">
+            <div class="avatar" style="background: linear-gradient(135deg, #6366f1, #ec4899);">ЕВ</div>
+            <div>
+              <div class="candidate-name">Елена Васильева</div>
+              <div class="candidate-role">Senior React Developer • Frontend-разработка</div>
+            </div>
+          </div>
+          <div class="skills-row">
+            <span class="skill-chip">React L5</span>
+            <span class="skill-chip">TypeScript L4</span>
+            <span class="skill-chip">GraphQL L4</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="pill pill-green">🐦 Жаворонок</span>
+            <div class="score-badge">95.0</div>
+          </div>
+        </div>
+
+        <div class="candidate-card">
+          <div class="candidate-info">
+            <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">МИ</div>
+            <div>
+              <div class="candidate-name">Михаил Иванов</div>
+              <div class="candidate-role">DevOps Engineer • Инфраструктура</div>
+            </div>
+          </div>
+          <div class="skills-row">
+            <span class="skill-chip">Kubernetes L4</span>
+            <span class="skill-chip">CI/CD L5</span>
+            <span class="skill-chip">Linux L5</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="pill pill-cyan">🦉 Сова</span>
+            <div class="score-badge">93.2</div>
+          </div>
+        </div>
+
+        <div class="candidate-card">
+          <div class="candidate-info">
+            <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6);">АС</div>
+            <div>
+              <div class="candidate-name">Анна Смирнова</div>
+              <div class="candidate-role">QA Lead • Отдел тестирования</div>
+            </div>
+          </div>
+          <div class="skills-row">
+            <span class="skill-chip">Playwright L4</span>
+            <span class="skill-chip">Pytest L4</span>
+            <span class="skill-chip">CI/CD L3</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="pill pill-purple">⚡ Гибрид</span>
+            <div class="score-badge">92.0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Algorithmic breakdown -->
+      <div class="glass-card">
+        <div class="section-header">
+          <h3>Критерии оценки состава</h3>
+        </div>
+
+        <div class="formula-box">
+          S = 0.35K + 0.25A + 0.20L + 0.10T + 0.10C
+        </div>
+
+        <div class="score-meter">
+          <div class="meter-item">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Навыки и компетенции (35%)</span>
+              <strong style="color: #fff;">98/100</strong>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 98%;"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Доступность по графику (25%)</span>
+              <strong style="color: #fff;">94/100</strong>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 94%; background: linear-gradient(90deg, #10b981, #06b6d4);"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Баланс нагрузки (20%)</span>
+              <strong style="color: #fff;">91/100</strong>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 91%; background: linear-gradient(90deg, #a855f7, #6366f1);"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Синхронизация рабочих окон (10%)</span>
+              <strong style="color: #fff;">88/100</strong>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 88%; background: linear-gradient(90deg, #f59e0b, #ef4444);"></div></div>
+          </div>
+
+          <div class="meter-item">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-muted);">Психологическая совместимость (10%)</span>
+              <strong style="color: #fff;">96/100</strong>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" style="width: 96%; background: linear-gradient(90deg, #06b6d4, #10b981);"></div></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-card);">
+          <button class="btn btn-primary" style="width: 100%; justify-content: center;">
+            ✓ Утвердить команду в производство
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

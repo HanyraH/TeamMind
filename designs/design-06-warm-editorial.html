@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Warm Editorial Craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf9f5;
+      --card: #ffffff;
+      --border: #eaddcf;
+      --border-subtle: #f0eae1;
+      --text: #26211e;
+      --text-muted: #796f66;
+      --terracotta: #c25e38;
+      --terracotta-light: #fbeee9;
+      --sage: #386641;
+      --sage-light: #f2f7f3;
+      --amber: #bc6c25;
+      --font-serif: 'Newsreader', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #f5f0e8;
+      border-right: 1px solid var(--border);
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--terracotta);
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 6px; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .nav li.active a, .nav a:hover {
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .main {
+      flex: 1;
+      padding: 36px 48px;
+      overflow-y: auto;
+    }
+
+    .header h1 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 600;
+      font-style: italic;
+      color: #1a1512;
+      margin-bottom: 6px;
+    }
+    .header p { color: var(--text-muted); font-size: 15px; }
+
+    .grid-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+    .metric-title { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-value {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      color: var(--terracotta);
+      margin: 8px 0;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-terra { background: var(--terracotta); color: white; }
+    .btn-terra:hover { background: #b04f2a; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px;
+    }
+
+    .person-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .person-row:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span>✦</span> TeamMind Craft
+    </div>
+
+    <ul class="nav">
+      <li class="active"><a href="#">Командные студии</a></li>
+      <li><a href="#">Каталог мастеров</a></li>
+      <li><a href="#">Творческие проекты</a></li>
+      <li><a href="#">Баланс отдыха</a></li>
+      <li><a href="#">Философия команды</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div class="header">
+        <h1>Сборка творческого ядра</h1>
+        <p>Архитектура команды для проекта «Новая медиа-платформа»</p>
+      </div>
+      <button class="btn btn-terra">Сформировать ансамбль</button>
+    </div>
+
+    <div class="grid-metrics">
+      <div class="metric-card">
+        <div class="metric-title">Психологический резонанс</div>
+        <div class="metric-value">96%</div>
+        <span style="font-size: 12px; color: var(--sage); font-weight: 600;">Высокая гармония взглядов</span>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Синтез навыков</div>
+        <div class="metric-value">100%</div>
+        <span style="font-size: 12px; color: var(--terracotta); font-weight: 600;">Полное взаимодополнение</span>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Ритмичность работы</div>
+        <div class="metric-value">5.8 ч</div>
+        <span style="font-size: 12px; color: var(--amber); font-weight: 600;">Общие часы глубокого фокуса</span>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Защита от выгорания</div>
+        <div class="metric-value">0.80</div>
+        <span style="font-size: 12px; color: var(--sage); font-weight: 600;">Экологичный темп</span>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <h3 style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 20px;">
+          Состав команды
+        </h3>
+
+        <div class="person-row">
+          <div>
+            <div style="font-weight: 600; font-size: 15px;">Дмитрий Кузнецов</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Мастер архитектуры бэкенда • Python / Django</div>
+          </div>
+          <span style="font-family: var(--font-serif); font-size: 20px; color: var(--terracotta);">98.4</span>
+        </div>
+
+        <div class="person-row">
+          <div>
+            <div style="font-weight: 600; font-size: 15px;">Елена Васильева</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Инженер интерфейсов • React / TypeScript</div>
+          </div>
+          <span style="font-family: var(--font-serif); font-size: 20px; color: var(--terracotta);">96.1</span>
+        </div>
+      </div>
+
+      <div class="card" style="background: #fbf8f3;">
+        <h3 style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 14px;">
+          Заметка куратора
+        </h3>
+        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.7;">
+          Этот состав объединяет глубокое техническое мастерство и чуткое понимание пользовательского опыта. Графики синхронизированы без перегрузок.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

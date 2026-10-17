@@ -1,0 +1,23 @@
+# Core
+Django==5.1.15
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.4.0
+django-filter==24.3
+
+# GraphQL
+strawberry-graphql>=0.330.0
+
+# Database
+psycopg[binary]==3.3.6
+
+# Configuration & Media
+python-decouple==3.8
+Pillow>=11.1.0
+
+# Testing & Demo Data
+pytest>=8.3.0
+pytest-django>=4.9.0
+pytest-asyncio>=1.4.0
+Faker>=30.0.0
+factory-boy>=3.3.0

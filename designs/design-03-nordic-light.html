@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Nordic Light Slate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --emerald: #059669;
+      --emerald-light: #ecfdf5;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Clean Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .nav { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 4px; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .nav li.active a, .nav a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Main Area */
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .header-text h1 {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .header-text p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-outline { background: white; border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { background: #f1f5f9; }
+
+    /* Cards */
+    .grid-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .metric-name { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .metric-val {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 8px 0;
+      letter-spacing: -1px;
+    }
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-green { background: var(--emerald-light); color: var(--emerald); }
+    .badge-blue { background: var(--primary-light); color: var(--primary); }
+
+    /* Split layout */
+    .split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .employee-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      transition: all 0.15s;
+    }
+    .employee-row:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .user-block { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: var(--text);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .skill-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">TM</div>
+      <div class="brand-title">TeamMind</div>
+    </div>
+
+    <ul class="nav">
+      <li class="active"><a href="#">📊 Обзор команд</a></li>
+      <li><a href="#">⚡ Конструктор</a></li>
+      <li><a href="#">📁 Проекты</a></li>
+      <li><a href="#">👥 Сотрудники</a></li>
+      <li><a href="#">🏖 Отпуска</a></li>
+      <li><a href="#">📈 Отчеты HR</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div class="header-text">
+        <h1>Сборка состава: Мобильный необанк</h1>
+        <p>Кросс-функциональная команда разработки (iOS, Android, Backend)</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-outline">Параметры подбора</button>
+        <button class="btn btn-primary">+ Запустить расчет</button>
+      </div>
+    </div>
+
+    <div class="grid-metrics">
+      <div class="card">
+        <div class="metric-name">Интегральный скоринг</div>
+        <div class="metric-val">96.8</div>
+        <span class="metric-badge badge-green">↑ Наивысшая оценка</span>
+      </div>
+      <div class="card">
+        <div class="metric-name">Квалификационный баланс</div>
+        <div class="metric-val">100%</div>
+        <span class="metric-badge badge-blue">Все требования стека закрыты</span>
+      </div>
+      <div class="card">
+        <div class="metric-name">Синхронные часы</div>
+        <div class="metric-val">6.0 ч</div>
+        <span class="metric-badge badge-green">Оптимальное рабочее окно</span>
+      </div>
+      <div class="card">
+        <div class="metric-name">Загрузка команды</div>
+        <div class="metric-val">82%</div>
+        <span class="metric-badge badge-blue">В пределах нормы</span>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 16px;">
+          Рекомендованные участники
+        </h3>
+
+        <div class="employee-row">
+          <div class="user-block">
+            <div class="avatar" style="background: #eff6ff; color: #2563eb;">АС</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Александр Смирнов</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Lead Mobile Architect • Отдел мобильной разработки</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <span class="skill-tag">Flutter L5</span>
+            <span class="skill-tag">Kotlin L4</span>
+          </div>
+          <span class="metric-badge badge-green">98.2 балла</span>
+        </div>
+
+        <div class="employee-row">
+          <div class="user-block">
+            <div class="avatar" style="background: #fdf2f8; color: #db2777;">МК</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Мария Ковалева</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Senior Backend Engineer • Серверные системы</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <span class="skill-tag">Django L5</span>
+            <span class="skill-tag">PostgreSQL L5</span>
+          </div>
+          <span class="metric-badge badge-green">96.0 баллов</span>
+        </div>
+
+        <div class="employee-row">
+          <div class="user-block">
+            <div class="avatar" style="background: #ecfdf5; color: #059669;">ИП</div>
+            <div>
+              <div style="font-weight: 600; font-size: 14px;">Иван Петров</div>
+              <div style="font-size: 12px; color: var(--text-muted);">UI/UX Designer • Дизайн-лаборатория</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <span class="skill-tag">Figma L5</span>
+            <span class="skill-tag">Design Systems L5</span>
+          </div>
+          <span class="metric-badge badge-green">94.5 балла</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 16px;">
+          Обоснование алгоритма
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
+          Состав подобран с учетом минимального разрыва рабочих графиков: Александр (жаворонок) и Мария (промежуточный) имеют 6 часов непрерывного общего времени.
+        </p>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center;">
+          Утвердить в проект
+        </button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "teammind-desktop",
+  "version": "1.0.0",
+  "description": "TeamMind - Smart Team Assembly Assistant",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1"
+  }
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Enterprise FinTech Blue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b132b;
+      --card: #1c2541;
+      --card-hover: #233157;
+      --border: #2e3d66;
+      --blue: #3a86ff;
+      --cyan: #4cc9f0;
+      --emerald: #06d6a0;
+      --gold: #ffd166;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-heading: 'Lexend', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #0f1a36;
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      color: white;
+    }
+
+    .menu { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .menu li.active a, .menu a:hover {
+      background: rgba(58, 134, 255, 0.15);
+      color: #fff;
+      border-left: 3px solid var(--blue);
+    }
+
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+    .btn-blue { background: var(--blue); color: white; }
+    .btn-blue:hover { background: #2670e8; }
+    .btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .kpi-title { font-size: 12px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-num {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      margin: 8px 0;
+      color: #fff;
+    }
+    .kpi-sub { font-size: 12px; color: var(--emerald); font-weight: 500; }
+
+    .split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .row-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">TM</div>
+      <div>
+        <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700;">TeamMind</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Enterprise Governance</div>
+      </div>
+    </div>
+
+    <ul class="menu">
+      <li class="active"><a href="#">📊 Обзор портфеля</a></li>
+      <li><a href="#">⚡ Формирование команд</a></li>
+      <li><a href="#">📁 Проектный контур</a></li>
+      <li><a href="#">👥 Реестр персонала</a></li>
+      <li><a href="#">🏖 Планирование отпусков</a></li>
+      <li><a href="#">🛡 Комплаенс & Риски</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="top-header">
+      <div>
+        <h1 style="font-family: var(--font-heading); font-size: 26px; font-weight: 700;">Банковский шлюз: Проектный состав #104</h1>
+        <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Стандарт надежности Tier-4 • PCI DSS Соответствие</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-outline">Экспорт отчета аудита</button>
+        <button class="btn btn-blue">Утвердить приказ</button>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="card">
+        <div class="kpi-title">Индекс готовности команды</div>
+        <div class="kpi-num" style="color: var(--blue);">98.4%</div>
+        <div class="kpi-sub">✓ Соответствует SLA</div>
+      </div>
+      <div class="card">
+        <div class="kpi-title">Квалификационный резерв</div>
+        <div class="kpi-num" style="color: var(--emerald);">+22%</div>
+        <div class="kpi-sub">Запас компетенций при инцидентах</div>
+      </div>
+      <div class="card">
+        <div class="kpi-title">Ресурсная утилизация</div>
+        <div class="kpi-num" style="color: var(--gold);">84.0%</div>
+        <div class="kpi-sub">Оптимальный диапазон нагрузки</div>
+      </div>
+      <div class="card">
+        <div class="kpi-title">Риск несовпадения графиков</div>
+        <div class="kpi-num">0.0%</div>
+        <div class="kpi-sub">Полное перекрытие дежурств</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px;">Назначенный состав специалистов</h3>
+        <div class="row-card">
+          <div>
+            <div style="font-weight: 600;">Дмитрий Кузнецов</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Главный разработчик • Backend Core</div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--cyan);">40 ч/нед</span>
+          <span style="font-family: var(--font-mono); font-weight: 700; color: var(--emerald);">99.0</span>
+        </div>
+        <div class="row-card">
+          <div>
+            <div style="font-weight: 600;">Елена Васильева</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Руководитель разработки UI • Frontend Group</div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--cyan);">40 ч/нед</span>
+          <span style="font-family: var(--font-mono); font-weight: 700; color: var(--emerald);">96.5</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px;">Протокол соответствия</h3>
+        <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+          Все кандидаты проверены службой комплаенса, текущая загрузка не превышает плановых 40 рабочих часов в неделю.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

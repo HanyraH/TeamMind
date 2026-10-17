@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Sunset Horizon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #12091f;
+      --card: rgba(35, 20, 56, 0.65);
+      --card-border: rgba(255, 107, 107, 0.18);
+      --coral: #ff6b6b;
+      --peach: #ffa07a;
+      --gold: #feca57;
+      --lavender: #c8b6ff;
+      --text: #fdf2f8;
+      --text-muted: #d8b4e2;
+      --font: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(255, 107, 107, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(254, 202, 87, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(200, 182, 255, 0.08) 0%, transparent 50%);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: rgba(23, 11, 40, 0.85);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--card-border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--coral), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #12091f;
+      font-size: 16px;
+      box-shadow: 0 4px 18px rgba(255, 107, 107, 0.4);
+    }
+
+    .menu { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 6px; }
+    .menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 30px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .menu li.active a, .menu a:hover {
+      background: linear-gradient(90deg, rgba(255, 107, 107, 0.2), rgba(254, 202, 87, 0.1));
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .main {
+      flex: 1;
+      padding: 36px 44px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--peach) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-sunset {
+      padding: 12px 24px;
+      border-radius: 30px;
+      background: linear-gradient(90deg, var(--coral), var(--peach));
+      color: #12091f;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-sunset:hover {
+      box-shadow: 0 6px 28px rgba(255, 107, 107, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .sunset-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-val {
+      font-family: var(--font-mono);
+      font-size: 34px;
+      font-weight: 800;
+      margin: 8px 0;
+      color: var(--gold);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 28px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+      <div>
+        <div style="font-weight: 800; font-size: 16px;">TeamMind</div>
+        <div style="font-size: 11px; color: var(--peach);">Sunset Horizon UI</div>
+      </div>
+    </div>
+
+    <ul class="menu">
+      <li class="active"><a href="#">🌅 Главная студия</a></li>
+      <li><a href="#">✨ Конструктор команд</a></li>
+      <li><a href="#">🎯 Проекты компании</a></li>
+      <li><a href="#">👥 Специалисты</a></li>
+      <li><a href="#">🌴 График отдыха</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div>
+        <h1>Тепловая сборка проектной команды</h1>
+        <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Сбалансированная гармония навыков и рабочего графика</p>
+      </div>
+      <button class="btn-sunset">✨ Начать сборку состава</button>
+    </div>
+
+    <div class="grid-4">
+      <div class="sunset-card">
+        <div style="font-size: 13px; color: var(--text-muted);">Коэффициент гармонии</div>
+        <div class="stat-val">96.5%</div>
+        <div style="font-size: 12px; color: var(--peach);">Идеальный психологический баланс</div>
+      </div>
+      <div class="sunset-card">
+        <div style="font-size: 13px; color: var(--text-muted);">Покрытие ключевых тем</div>
+        <div class="stat-val" style="color: var(--coral);">100%</div>
+        <div style="font-size: 12px; color: var(--coral);">Все 12 требований закрыты</div>
+      </div>
+      <div class="sunset-card">
+        <div style="font-size: 13px; color: var(--text-muted);">Синхронное окно</div>
+        <div class="stat-val" style="color: var(--lavender);">6.2 ч</div>
+        <div style="font-size: 12px; color: var(--lavender);">Комфортное время для созвонов</div>
+      </div>
+      <div class="sunset-card">
+        <div style="font-size: 13px; color: var(--text-muted);">Защита от перегрузки</div>
+        <div class="stat-val" style="color: var(--peach);">0%</div>
+        <div style="font-size: 12px; color: var(--peach);">Баланс сил в норме</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="sunset-card">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 18px;">Предложенный состав (Вариант #1)</h3>
+
+        <div class="member-item">
+          <div>
+            <div style="font-weight: 700; font-size: 15px;">Дмитрий Кузнецов</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Senior Backend • Python / Django</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-weight: 700; font-size: 18px; color: var(--gold);">98.8</div>
+        </div>
+
+        <div class="member-item">
+          <div>
+            <div style="font-weight: 700; font-size: 15px;">Елена Васильева</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Lead Frontend • React / Vite</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-weight: 700; font-size: 18px; color: var(--gold);">96.5</div>
+        </div>
+      </div>
+
+      <div class="sunset-card" style="background: linear-gradient(180deg, rgba(255, 107, 107, 0.1), rgba(35, 20, 56, 0.8));">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px;">Резюме алгоритма</h3>
+        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.7;">
+          Вариант обеспечивает максимальную скорость запуска проекта без риска выгорания ключевых разработчиков.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

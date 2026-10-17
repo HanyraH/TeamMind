@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — 10 Концепций Дизайна (Design Showcase)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --panel: #111827;
+      --card: #1f2937;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-active: #6366f1;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --radius: 12px;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top App Header */
+    .top-nav {
+      height: 64px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 16px;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .brand-sub {
+      font-size: 12px;
+      color: var(--primary-light);
+      font-weight: 500;
+    }
+
+    /* Controls in header */
+    .viewport-controls {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      gap: 4px;
+    }
+    .vp-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .vp-btn.active, .vp-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-external {
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s;
+    }
+    .btn-external:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Main Workspace */
+    .workspace {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Concept Cards */
+    .concept-sidebar {
+      width: 380px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-header h2 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .concept-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .concept-card {
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .concept-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .concept-card.active {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: var(--primary);
+      box-shadow: 0 0 18px rgba(99, 102, 241, 0.25);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .concept-id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-light);
+      background: rgba(99, 102, 241, 0.15);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .concept-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .concept-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      align-items: center;
+    }
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .mood-tag {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #d1d5db;
+    }
+
+    /* Right Preview Area */
+    .preview-stage {
+      flex: 1;
+      background: #06090e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .iframe-wrapper {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      transition: width 0.3s ease, height 0.3s ease;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Detail Drawer */
+    .palette-drawer {
+      height: 60px;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-nav">
+    <div class="brand-group">
+      <div class="logo-badge">TM</div>
+      <div>
+        <div class="brand-title">TeamMind • 10 Концепций Дизайна</div>
+        <div class="brand-sub">Интеллектуальный помощник формирования проектных команд</div>
+      </div>
+    </div>
+
+    <!-- Viewport Switcher -->
+    <div class="viewport-controls">
+      <button class="vp-btn active" onclick="setViewport('100%', this)">🖥 Desktop (100%)</button>
+      <button class="vp-btn" onclick="setViewport('1280px', this)">💻 Laptop (1280px)</button>
+      <button class="vp-btn" onclick="setViewport('820px', this)">📱 Tablet (820px)</button>
+    </div>
+
+    <!-- External Link -->
+    <a id="openTabBtn" href="design-01-dark-glassmorphism.html" target="_blank" class="btn-external">
+      <span>↗ Открыть отдельно на весь экран</span>
+    </a>
+  </header>
+
+  <!-- Workspace -->
+  <div class="workspace">
+    <!-- Concept List -->
+    <aside class="concept-sidebar">
+      <div class="sidebar-header">
+        <h2>Каталог концепций (Выберите стиль)</h2>
+      </div>
+
+      <div class="concept-list">
+        <!-- 01 -->
+        <div class="concept-card active" onclick="loadDesign(1, 'design-01-dark-glassmorphism.html', this)">
+          <div class="card-top">
+            <span class="concept-id">01</span>
+            <div class="concept-name">Modern Dark Glassmorphism</div>
+          </div>
+          <div class="concept-desc">Глубокий индиго, матовое стекло, неоновые акценты и свечение. Стиль флагманских AI-платформ.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #090d16;"></div>
+            <div class="swatch" style="background: #6366f1;"></div>
+            <div class="swatch" style="background: #a855f7;"></div>
+            <div class="swatch" style="background: #06b6d4;"></div>
+            <span class="mood-tag">🌙 Dark Glow</span>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="concept-card" onclick="loadDesign(2, 'design-02-linear-minimal.html', this)">
+          <div class="card-top">
+            <span class="concept-id">02</span>
+            <div class="concept-name">Linear / Swiss Minimalist</div>
+          </div>
+          <div class="concept-desc">Монохромный минимализм, тонкие границы, моноширинный акцент, максимальная плотность данных.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #000000;"></div>
+            <div class="swatch" style="background: #222226;"></div>
+            <div class="swatch" style="background: #ffffff;"></div>
+            <div class="swatch" style="background: #10b981;"></div>
+            <span class="mood-tag">⚙ Developer</span>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="concept-card" onclick="loadDesign(3, 'design-03-nordic-light.html', this)">
+          <div class="card-top">
+            <span class="concept-id">03</span>
+            <div class="concept-name">Nordic Clean Light Slate</div>
+          </div>
+          <div class="concept-desc">Светлая премиальная тема: воздушный скандинавский фон, глубокий синий кобальт и мягкие тени.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #f8fafc;"></div>
+            <div class="swatch" style="background: #ffffff;"></div>
+            <div class="swatch" style="background: #2563eb;"></div>
+            <div class="swatch" style="background: #059669;"></div>
+            <span class="mood-tag">☀️ Light Clean</span>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="concept-card" onclick="loadDesign(4, 'design-04-aurora-cyber.html', this)">
+          <div class="card-top">
+            <span class="concept-id">04</span>
+            <div class="concept-name">Cyber Deep Aurora</div>
+          </div>
+          <div class="concept-desc">Обсидиановый космос, градиенты северного сияния, неоновый циан и маджента. Стиль кибернетики.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #040711;"></div>
+            <div class="swatch" style="background: #00f2fe;"></div>
+            <div class="swatch" style="background: #ff0844;"></div>
+            <div class="swatch" style="background: #7928ca;"></div>
+            <span class="mood-tag">⚡ Cyber-Glow</span>
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="concept-card" onclick="loadDesign(5, 'design-05-enterprise-fintech.html', this)">
+          <div class="card-top">
+            <span class="concept-id">05</span>
+            <div class="concept-name">Enterprise FinTech Blue</div>
+          </div>
+          <div class="concept-desc">Банковский синий, строгие виджеты комплаенса и SLA, надежная финансовая архитектура.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #0b132b;"></div>
+            <div class="swatch" style="background: #1c2541;"></div>
+            <div class="swatch" style="background: #3a86ff;"></div>
+            <div class="swatch" style="background: #06d6a0;"></div>
+            <span class="mood-tag">🛡 Corporate</span>
+          </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="concept-card" onclick="loadDesign(6, 'design-06-warm-editorial.html', this)">
+          <div class="card-top">
+            <span class="concept-id">06</span>
+            <div class="concept-name">Warm Editorial Craft</div>
+          </div>
+          <div class="concept-desc">Теплая текстура крафтовой бумаги, элегантный антиква-шрифт, терракота и природный шалфей.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #fbf9f5;"></div>
+            <div class="swatch" style="background: #f5f0e8;"></div>
+            <div class="swatch" style="background: #c25e38;"></div>
+            <div class="swatch" style="background: #386641;"></div>
+            <span class="mood-tag">📜 Editorial</span>
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="concept-card" onclick="loadDesign(7, 'design-07-neo-brutalist.html', this)">
+          <div class="card-top">
+            <span class="concept-id">07</span>
+            <div class="concept-name">Neo-Brutalist Modern Tech</div>
+          </div>
+          <div class="concept-desc">Жирные черные контуры 3px, жесткие тени с оффсетом, солнечный желтый и дерзкая энергия.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #fdfae5;"></div>
+            <div class="swatch" style="background: #121212;"></div>
+            <div class="swatch" style="background: #ffd000;"></div>
+            <div class="swatch" style="background: #ff5e7e;"></div>
+            <span class="mood-tag">💥 Neo-Brutal</span>
+          </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="concept-card" onclick="loadDesign(8, 'design-08-oled-emerald.html', this)">
+          <div class="card-top">
+            <span class="concept-id">08</span>
+            <div class="concept-name">Midnight OLED & Emerald Glow</div>
+          </div>
+          <div class="concept-desc">Чистый черный 0% OLED, неоновый изумруд, точность терминала и высокая энергоэффективность.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #030708;"></div>
+            <div class="swatch" style="background: #10b981;"></div>
+            <div class="swatch" style="background: #6ee7b7;"></div>
+            <span class="mood-tag">📟 Terminal</span>
+          </div>
+        </div>
+
+        <!-- 09 -->
+        <div class="concept-card" onclick="loadDesign(9, 'design-09-sunset-gradient.html', this)">
+          <div class="card-top">
+            <span class="concept-id">09</span>
+            <div class="concept-name">Sunset Horizon Glass</div>
+          </div>
+          <div class="concept-desc">Глубокий бархатный сливовый фон, закатный коралл, персик и теплое золотое сияние.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #12091f;"></div>
+            <div class="swatch" style="background: #ff6b6b;"></div>
+            <div class="swatch" style="background: #ffa07a;"></div>
+            <div class="swatch" style="background: #feca57;"></div>
+            <span class="mood-tag">🌅 Sunset Warm</span>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="concept-card" onclick="loadDesign(10, 'design-10-bento-hud.html', this)">
+          <div class="card-top">
+            <span class="concept-id">10</span>
+            <div class="concept-name">Bento Grid Command Center</div>
+          </div>
+          <div class="concept-desc">Модульная сетка Бенто в стиле Apple, разный спан плиток, концентрированная инфографика.</div>
+          <div class="swatches">
+            <div class="swatch" style="background: #0b0e14;"></div>
+            <div class="swatch" style="background: #121824;"></div>
+            <div class="swatch" style="background: #38bdf8;"></div>
+            <div class="swatch" style="background: #a3e635;"></div>
+            <span class="mood-tag">▦ Bento Modular</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Preview Stage -->
+    <main class="preview-stage">
+      <div id="wrapper" class="iframe-wrapper">
+        <iframe id="previewFrame" src="design-01-dark-glassmorphism.html"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bottom Drawer -->
+  <footer class="palette-drawer">
+    <div id="paletteInfo">
+      <strong>Стиль #01: Modern Dark Glassmorphism</strong> — Шрифты: <code>Plus Jakarta Sans</code>, <code>JetBrains Mono</code> • Палитра: <code>#090d16</code>, <code>#6366f1</code>, <code>#a855f7</code>, <code>#06b6d4</code>
+    </div>
+    <div style="font-size: 12px; color: var(--text-muted);">
+      Все 10 прототипов полностью интерактивны и доступны в папке <code>/designs/</code>
+    </div>
+  </footer>
+
+  <script>
+    const DESIGNS_INFO = {
+      1: { name: 'Modern Dark Glassmorphism', file: 'design-01-dark-glassmorphism.html', fonts: 'Plus Jakarta Sans, JetBrains Mono', colors: '#090d16, #6366f1, #a855f7, #06b6d4' },
+      2: { name: 'Linear / Swiss Minimalist', file: 'design-02-linear-minimal.html', fonts: 'Geist, JetBrains Mono', colors: '#000000, #222226, #ffffff, #10b981' },
+      3: { name: 'Nordic Clean Light Slate', file: 'design-03-nordic-light.html', fonts: 'Outfit, Inter', colors: '#f8fafc, #ffffff, #2563eb, #059669' },
+      4: { name: 'Cyber Deep Aurora', file: 'design-04-aurora-cyber.html', fonts: 'Syne, Space Grotesk', colors: '#040711, #00f2fe, #ff0844, #7928ca' },
+      5: { name: 'Enterprise FinTech Blue', file: 'design-05-enterprise-fintech.html', fonts: 'Lexend, Inter', colors: '#0b132b, #1c2541, #3a86ff, #06d6a0' },
+      6: { name: 'Warm Editorial Craft', file: 'design-06-warm-editorial.html', fonts: 'Newsreader, Plus Jakarta Sans', colors: '#fbf9f5, #f5f0e8, #c25e38, #386641' },
+      7: { name: 'Neo-Brutalist Modern Tech', file: 'design-07-neo-brutalist.html', fonts: 'Space Grotesk, JetBrains Mono', colors: '#fdfae5, #121212, #ffd000, #ff5e7e' },
+      8: { name: 'Midnight OLED & Emerald Glow', file: 'design-08-oled-emerald.html', fonts: 'JetBrains Mono, Inter', colors: '#030708, #10b981, #6ee7b7' },
+      9: { name: 'Sunset Horizon Glass', file: 'design-09-sunset-gradient.html', fonts: 'DM Sans, JetBrains Mono', colors: '#12091f, #ff6b6b, #ffa07a, #feca57' },
+      10: { name: 'Bento Grid Command Center', file: 'design-10-bento-hud.html', fonts: 'Urbanist, JetBrains Mono', colors: '#0b0e14, #121824, #38bdf8, #a3e635' }
+    };
+
+    function loadDesign(id, file, cardElement) {
+      document.querySelectorAll('.concept-card').forEach(c => c.classList.remove('active'));
+      cardElement.classList.add('active');
+
+      document.getElementById('previewFrame').src = file;
+      document.getElementById('openTabBtn').href = file;
+
+      const info = DESIGNS_INFO[id];
+      document.getElementById('paletteInfo').innerHTML = `
+        <strong>Стиль #${id < 10 ? '0' + id : id}: ${info.name}</strong> — Шрифты: <code>${info.fonts}</code> • Палитра: <code>${info.colors}</code>
+      `;
+    }
+
+    function setViewport(width, btn) {
+      document.querySelectorAll('.vp-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('wrapper').style.width = width;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamMind — Bento Grid Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --bento: #121824;
+      --bento-hover: #182030;
+      --border: rgba(255, 255, 255, 0.08);
+      --cyan: #38bdf8;
+      --lime: #a3e635;
+      --purple: #c084fc;
+      --amber: #fbbf24;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font: 'Urbanist', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #0e121a;
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .nav { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nav li.active a, .nav a:hover {
+      background: var(--bento);
+      color: #fff;
+    }
+
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .btn-bento { background: #fff; color: #000; }
+    .btn-bento:hover { background: #e2e8f0; }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(130px, auto);
+      gap: 16px;
+    }
+
+    .bento-cell {
+      background: var(--bento);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-cell:hover {
+      background: var(--bento-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .col-span-2 { grid-column: span 2; }
+    .col-span-3 { grid-column: span 3; }
+    .col-span-4 { grid-column: span 4; }
+    .row-span-2 { grid-row: span 2; }
+
+    .bento-title { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+    .bento-num {
+      font-family: var(--font-mono);
+      font-size: 38px;
+      font-weight: 800;
+      margin: 8px 0;
+      letter-spacing: -1px;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span style="color: var(--cyan);">■</span> TeamMind Bento
+    </div>
+
+    <ul class="nav">
+      <li class="active"><a href="#">▦ Command Center</a></li>
+      <li><a href="#">◫ Team Assembler</a></li>
+      <li><a href="#">▥ Project Hub</a></li>
+      <li><a href="#">▤ Specialists (106)</a></li>
+      <li><a href="#">◪ Work Schedules</a></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div>
+        <h1 style="font-size: 26px; font-weight: 800;">Bento Operations Hub</h1>
+        <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Dynamic modular layout for multi-project orchestration</p>
+      </div>
+      <button class="btn btn-bento">Assemble Best Fit</button>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="bento-grid">
+      <!-- Tile 1: Main Metric -->
+      <div class="bento-cell col-span-2">
+        <div class="bento-title">OVERALL COMPATIBILITY (S)</div>
+        <div class="bento-num" style="color: var(--cyan);">97.2%</div>
+        <div><span class="pill" style="background: rgba(56, 189, 248, 0.15); color: var(--cyan);">P99 BENCHMARK</span></div>
+      </div>
+
+      <!-- Tile 2: Hours -->
+      <div class="bento-cell">
+        <div class="bento-title">SYNC HOURS</div>
+        <div class="bento-num" style="color: var(--lime);">6.5h</div>
+        <div style="font-size: 12px; color: var(--lime);">0% Meeting conflict</div>
+      </div>
+
+      <!-- Tile 3: Skill gaps -->
+      <div class="bento-cell">
+        <div class="bento-title">UNMET SKILLS</div>
+        <div class="bento-num" style="color: #fff;">0</div>
+        <div style="font-size: 12px; color: var(--text-muted);">14 of 14 fulfilled</div>
+      </div>
+
+      <!-- Tile 4: Roster list (Wide & tall) -->
+      <div class="bento-cell col-span-3 row-span-2">
+        <div>
+          <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">Optimized Team Composition</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(255, 255, 255, 0.03); border-radius: 12px;">
+              <div>
+                <div style="font-weight: 700;">Дмитрий Кузнецов</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Tech Lead • Django L5 / Postgres L5</div>
+              </div>
+              <span class="pill" style="background: rgba(163, 230, 53, 0.15); color: var(--lime);">99.2 PTS</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(255, 255, 255, 0.03); border-radius: 12px;">
+              <div>
+                <div style="font-weight: 700;">Елена Васильева</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Frontend Architect • React L5 / TS L5</div>
+              </div>
+              <span class="pill" style="background: rgba(163, 230, 53, 0.15); color: var(--lime);">97.5 PTS</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(255, 255, 255, 0.03); border-radius: 12px;">
+              <div>
+                <div style="font-weight: 700;">Михаил Попов</div>
+                <div style="font-size: 12px; color: var(--text-muted);">DevOps & SRE • K8s L4 / Docker L5</div>
+              </div>
+              <span class="pill" style="background: rgba(163, 230, 53, 0.15); color: var(--lime);">95.0 PTS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tile 5: Load Radar -->
+      <div class="bento-cell row-span-2">
+        <div class="bento-title">WORKLOAD ALLOCATION</div>
+        <div class="bento-num" style="color: var(--amber);">82%</div>
+        <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+          All candidates within 30-40 weekly capacity limits.
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
